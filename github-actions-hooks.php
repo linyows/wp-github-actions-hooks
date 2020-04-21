@@ -39,8 +39,8 @@ class gitHubActionsHooks
             <hr>
             <form method="POST" action="options.php">
             <?php
-                settings_fields('hooks_to_github_fields');
-                do_settings_sections('hooks_to_github_fields');
+                settings_fields('github_actions_hooks_fields');
+                do_settings_sections('github_actions_hooks_fields');
                 submit_button();
             ?>
             </form>
@@ -77,13 +77,13 @@ class gitHubActionsHooks
         $page_title = 'GitHub Actions Hooks';
         $menu_title = 'GitHub Actions Hooks';
         $capability = 'manage_options';
-        $slug = 'hooks_to_github_fields';
+        $slug = 'github_actions_hooks_fields';
         $callback = array($this, 'add_settings_page');
         add_options_page($page_title, $menu_title, $capability, $slug, $callback);
     }
 
     public function setup_sections() {
-        add_settings_section('github_settings_section', 'Settings', array($this, 'section_callback'), 'hooks_to_github_fields');
+        add_settings_section('github_settings_section', 'Settings', array($this, 'section_callback'), 'github_actions_hooks_fields');
     }
 
     public function section_callback($arguments){
@@ -114,8 +114,8 @@ class gitHubActionsHooks
         );
 
         foreach ($fields as $field) {
-            add_settings_field($field['uid'], $field['label'], array($this, 'field_callback'), 'hooks_to_github_fields', $field['section'], $field);
-            register_setting('hooks_to_github_fields', $field['uid']);
+            add_settings_field($field['uid'], $field['label'], array($this, 'field_callback'), 'github_actions_hooks_fields', $field['section'], $field);
+            register_setting('github_actions_hooks_fields', $field['uid']);
         }
     }
 
