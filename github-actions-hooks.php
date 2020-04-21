@@ -20,7 +20,8 @@
  */
 defined('ABSPATH') or die('You do not have access to this file.');
 
-class gitHubActionsHooks {
+class gitHubActionsHooks
+{
     public function __construct() {
         add_action('admin_menu', array($this, 'create_plugin_settings_page'));
         add_action('admin_init', array($this, 'setup_sections'));
@@ -36,17 +37,16 @@ class gitHubActionsHooks {
             <h1>GitHub Actions Hooks</h1>
             <hr>
             <form method="POST" action="options.php">
-                <?php
+            <?php
                 settings_fields('hooks_to_github_fields');
                 do_settings_sections('hooks_to_github_fields');
                 submit_button();
-                ?>
+            ?>
             </form>
             <footer>
                 <h3>Documentation</h3>
                 <p><a href="https://github.com/linyows/wp-github-actions-hooks/">Github repository</a></p>
             </footer>
-
         </div>
         <?php
     }
