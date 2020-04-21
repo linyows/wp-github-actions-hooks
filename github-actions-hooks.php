@@ -37,8 +37,8 @@ class gitHubActionsHooks {
             <hr>
             <form method="POST" action="options.php">
                 <?php
-                settings_fields('publish_to_github_fields');
-                do_settings_sections('publish_to_github_fields');
+                settings_fields('hooks_to_github_fields');
+                do_settings_sections('hooks_to_github_fields');
                 submit_button();
                 ?>
             </form>
