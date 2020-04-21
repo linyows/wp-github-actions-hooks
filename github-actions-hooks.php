@@ -35,6 +35,9 @@ class gitHubActionsHooks
         ?>
         <div class="wrap">
             <h1>GitHub Actions Hooks</h1>
+            <p><a href="https://developer.github.com/v3/repos/#create-a-repository-dispatch-event">Repository dispatch event API</a>
+                : https://api.github.com/repos/<:owner>/<:repository>/dispatches</p>
+            <p>New personal access token: <a href="https://github.com/settings/tokens/new">https://github.com/settings/tokens/new</a></p>
             <hr>
             <form method="POST" action="options.php">
             <?php
@@ -96,11 +99,10 @@ class gitHubActionsHooks
         $fields = array(
             array(
                 'uid' => 'webhook_address',
-                'label' => 'Repository dispatch event Endpoint',
+                'label' => 'API Endpoint',
                 'section' => 'github_settings_section',
                 'type' => 'text',
-                'placeholder' => 'https://api.github.com/repos/:owner/:repo/dispatches',
-                'default' => '',
+                'default' => 'https://api.github.com/repos/<:owner>/<:repo>/dispatches',
             ),
             array(
                 'uid' => 'webhook_token',
@@ -126,6 +128,8 @@ class gitHubActionsHooks
 
         switch ($arguments['type']) {
             case 'text':
+                printf('<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" style="width:95%;" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value);
+                break;
             case 'password':
             case 'number':
                 printf('<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value);
