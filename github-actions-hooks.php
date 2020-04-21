@@ -54,10 +54,22 @@ class gitHubActionsHooks
     public function github_dispatch($post_id, $post) {
         $status = $post->post_status;
         $webhook_url = get_option('webhook_address');
+        $webhook_token = get_option('webhook_token');
 
-        if (($status === 'publish') && (!empty($webhook_url))) {
-           wp_remote_post($webhook_url);
+        if ($status !== 'publish' || empty($webhook_url) || empty($webhook_token)) {
+            return;
         }
+
+        wp_remote_post($webhook_url, array(
+            'headers' => array(
+                'Content-Type' => 'application/json; charset=utf-8',
+                'Accept' => 'application/vnd.github.everest-preview+json',
+                'Authorization' => 'token ' . $webhook_token,
+            ),
+            'body' => json_encode(array(
+                'event_type' => 'wp_github_actions_hooks'
+            )),
+        ));
     }
 
     public function create_plugin_settings_page() {
@@ -84,10 +96,17 @@ class gitHubActionsHooks
         $fields = array(
             array(
                 'uid' => 'webhook_address',
-                'label' => 'GitHub Build Hook URL',
+                'label' => 'Repository dispatch event Endpoint',
                 'section' => 'github_settings_section',
                 'type' => 'text',
-                'placeholder' => 'github.com',
+                'placeholder' => 'https://api.github.com/repos/:owner/:repo/dispatches',
+                'default' => '',
+            ),
+            array(
+                'uid' => 'webhook_token',
+                'label' => 'Personal Access Token',
+                'section' => 'github_settings_section',
+                'type' => 'password',
                 'default' => '',
             ),
         );
