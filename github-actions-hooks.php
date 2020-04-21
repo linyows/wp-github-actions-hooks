@@ -68,7 +68,7 @@ class gitHubActionsHooks
                 'Authorization' => 'token ' . $webhook_token,
             ),
             'body' => json_encode(array(
-                'event_type' => 'wp_github_actions_hooks'
+                'event_type' => 'Publish posts from WordPress'
             )),
         ));
     }
