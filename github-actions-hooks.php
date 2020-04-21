@@ -35,9 +35,7 @@ class gitHubActionsHooks
         ?>
         <div class="wrap">
             <h1>GitHub Actions Hooks</h1>
-            <p><a href="https://developer.github.com/v3/repos/#create-a-repository-dispatch-event">Repository dispatch event API</a>
-                : https://api.github.com/repos/<:owner>/<:repository>/dispatches</p>
-            <p>New personal access token: <a href="https://github.com/settings/tokens/new">https://github.com/settings/tokens/new</a></p>
+            <p>After saving the public post, hook the GitHub Repository Dispatch Event API.</p>
             <hr>
             <form method="POST" action="options.php">
             <?php
@@ -103,6 +101,7 @@ class gitHubActionsHooks
                 'section' => 'github_settings_section',
                 'type' => 'text',
                 'default' => 'https://api.github.com/repos/<:owner>/<:repo>/dispatches',
+                'description' => '<a href="https://developer.github.com/v3/repos/#create-a-repository-dispatch-event">Repository dispatch event API</a> : https://api.github.com/repos/<:owner>/<:repository>/dispatches',
             ),
             array(
                 'uid' => 'webhook_token',
@@ -110,6 +109,7 @@ class gitHubActionsHooks
                 'section' => 'github_settings_section',
                 'type' => 'password',
                 'default' => '',
+                'description' => '<a href="https://github.com/settings/tokens/new">New personal access token</a>',
             ),
         );
 
@@ -128,11 +128,12 @@ class gitHubActionsHooks
 
         switch ($arguments['type']) {
             case 'text':
-                printf('<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" style="width:95%;" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value);
-                break;
             case 'password':
             case 'number':
                 printf('<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value);
+                if (!empty($arguments['description'])) {
+                    printf('<p id="%1$s-description" class="description">' . $arguments['description'] . '</p>', $arguments['uid']);
+                }
                 break;
             case 'textarea':
                 printf('<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value);
