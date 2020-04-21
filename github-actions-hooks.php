@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       GitHub Actions Hooks
  * Plugin URI:        https://github.com/linyows/wp-github-actions-hooks
- * Description:       Wordpress hooks to GitHub Actions.
+ * Description:       WordPress hooks to GitHub Actions.
  * Version:           1.0.0
  * Author:            linyows
  * Author URI:        https://github.com/linyows
