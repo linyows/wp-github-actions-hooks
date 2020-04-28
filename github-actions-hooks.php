@@ -37,8 +37,8 @@ class gitHubActionsHooks
             <h1>GitHub Actions Hooks</h1>
             <p>After saving the public post, hook the GitHub Repository Dispatch Event API.</p>
             <?php
-                if (defined('GITHUB_ACTIONS_HOOKS_API_ENDPOINT')) {
-                    echo '<p>Now GITHUB_ACTIONS_HOOKS_API_ENDPOINT is set in wp-config.php.</p>';
+                if (defined('GITHUB_ACTIONS_HOOKS_API')) {
+                    echo '<p>Now GITHUB_ACTIONS_HOOKS_API is set in wp-config.php.</p>';
                 }
                 if (defined('GITHUB_ACTIONS_HOOKS_TOKEN')) {
                     echo '<p>Now GITHUB_ACTIONS_HOOKS_TOKEN is set in wp-config.php.</p>';
@@ -67,8 +67,8 @@ class gitHubActionsHooks
         $webhook_token = get_option('webhook_token');
 
         if ($status !== 'publish' || empty($webhook_url) || empty($webhook_token)) {
-            if (defined('GITHUB_ACTIONS_HOOKS_API_ENDPOINT') && defined('GITHUB_ACTIONS_HOOKS_TOKEN')) {
-                $webhook_url = GITHUB_ACTIONS_HOOKS_API_ENDPOINT;
+            if (defined('GITHUB_ACTIONS_HOOKS_API') && defined('GITHUB_ACTIONS_HOOKS_TOKEN')) {
+                $webhook_url = GITHUB_ACTIONS_HOOKS_API;
                 $webhook_token = GITHUB_ACTIONS_HOOKS_TOKEN;
             } else {
                 return;
