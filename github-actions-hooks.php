@@ -36,7 +36,6 @@ class gitHubActionsHooks
         <div class="wrap">
             <h1>GitHub Actions Hooks</h1>
             <p>After saving the public post, hook the GitHub Repository Dispatch Event API.</p>
-            <hr>
             <form method="POST" action="options.php">
             <?php
                 settings_fields('github_actions_hooks_fields');
@@ -44,6 +43,7 @@ class gitHubActionsHooks
                 submit_button();
             ?>
             </form>
+            <hr>
             <footer>
                 <h3>Documentation</h3>
                 <p><a href="https://github.com/linyows/wp-github-actions-hooks/">Github repository</a></p>
